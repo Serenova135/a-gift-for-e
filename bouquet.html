@@ -28,40 +28,9 @@ html, body {
 
 body {
     font-family: 'Cormorant Garamond', serif;
-    background: linear-gradient(135deg, #f0d5f4 0%, #c9aedb 50%, #9b7bb5 100%);
+    background: linear-gradient(135deg, #f5e6f8 0%, #e8d5f0 50%, #d4b8e0 100%);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-}
-
-.butterfly {
-    position: fixed;
-    font-size: 2rem;
-    z-index: 100;
-    pointer-events: none;
-    animation: flyButterfly 8s ease-in-out infinite;
-}
-
-@keyframes flyButterfly {
-    0%, 100% { 
-        left: -10%;
-        top: 20%;
-        transform: rotate(0deg);
-    }
-    25% {
-        left: 30%;
-        top: 40%;
-        transform: rotate(15deg);
-    }
-    50% {
-        left: 70%;
-        top: 30%;
-        transform: rotate(-10deg);
-    }
-    75% {
-        left: 40%;
-        top: 60%;
-        transform: rotate(20deg);
-    }
 }
 
 .container {
@@ -241,8 +210,6 @@ body {
     </style>
 </head>
 <body>
-    <div class="butterfly">🦋</div>
-    
     <div class="container">
         <a href="index.html" class="back-button">← Back</a>
         
@@ -252,34 +219,31 @@ body {
         
         <div class="flower-meanings">
             <div class="flower-card">
-                <div class="flower-icon">🌸</div>
-                <h3 class="flower-type">Lavender</h3>
-              
-            </div>
-            
-            <div class="flower-card">
-                <div class="flower-icon">🌺</div>
-                <h3 class="flower-type">Hibiscus</h3>
-               
-            </div>
-            
-            <div class="flower-card">
                 <div class="flower-icon">🌷</div>
-                <h3 class="flower-type">Tulip</h3>
-               
+                <h3 class="flower-type">Purple Tulip</h3>
+            </div>
+            
+            <div class="flower-card">
+                <div class="flower-icon">🌼</div>
+                <h3 class="flower-type">Daisy</h3>
             </div>
             
             <div class="flower-card">
                 <div class="flower-icon">🌹</div>
-                <h3 class="flower-type">Rose</h3>
-               
+                <h3 class="flower-type">Red Rose</h3>
+            </div>
+            
+            <div class="flower-card">
+                <div class="flower-icon">🌻</div>
+                <h3 class="flower-type">Sunflower</h3>
             </div>
         </div>
         
         <div class="message-box">
             <p class="flower-message">
                 Ginawa ko ito para sa iyo because you deserve
-                something beautiful today, hope you like it. 
+                something beautiful today, hope you like it.
+            </p>
             <p class="flower-quote">
                 "I'd pick you every time." 💐
             </p>

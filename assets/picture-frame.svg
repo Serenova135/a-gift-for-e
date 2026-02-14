@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Frame outer -->
+  <rect x="35" y="45" width="130" height="110" fill="#9b7bb5" stroke="#7a5a9a" stroke-width="3" rx="4"/>
+  
+  <!-- Frame inner border -->
+  <rect x="45" y="55" width="110" height="90" fill="#ffffff" stroke="#b399cc" stroke-width="2"/>
+  
+  <!-- Photo area with gradient -->
+  <rect x="50" y="60" width="100" height="80" fill="url(#photoGrad)"/>
+  
+  <!-- Heart in photo -->
+  <g transform="translate(100, 100)">
+    <path d="M 0,-12 C -5,-20 -15,-20 -15,-12 C -15,-4 0,10 0,10 C 0,10 15,-4 15,-12 C 15,-20 5,-20 0,-12 Z" fill="#e8c5ec" opacity="0.8"/>
+    <path d="M 0,-12 C -5,-20 -15,-20 -15,-12 C -15,-4 0,10 0,10 C 0,10 15,-4 15,-12 C 15,-20 5,-20 0,-12 Z" stroke="#d4a5d8" stroke-width="2" fill="none"/>
+  </g>
+  
+  <!-- Corner decorations -->
+  <circle cx="45" cy="55" r="3" fill="#e8c5ec"/>
+  <circle cx="155" cy="55" r="3" fill="#e8c5ec"/>
+  <circle cx="45" cy="145" r="3" fill="#e8c5ec"/>
+  <circle cx="155" cy="145" r="3" fill="#e8c5ec"/>
+  
+  <!-- Stand -->
+  <path d="M 90 155 L 85 175 L 115 175 L 110 155 Z" fill="#b399cc" stroke="#9b7bb5" stroke-width="2"/>
+  
+  <!-- Shine on frame -->
+  <rect x="40" y="50" width="4" height="30" fill="white" opacity="0.3" rx="2"/>
+  
+  <defs>
+    <linearGradient id="photoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0d5f4;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#c9aedb;stop-opacity:0.3" />
+    </linearGradient>
+  </defs>
+</svg>

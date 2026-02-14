@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Gift For You 💝</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+:root {
+    --lavender-dark: #6b4c7a;
+    --lavender-medium: #9b7bb5;
+    --lavender-light: #c9aedb;
+    --lavender-pale: #e8c5ec;
+    --lavender-super-light: #f0d5f4;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cormorant Garamond', serif;
+    background: linear-gradient(135deg, #f0d5f4 0%, #c9aedb 50%, #9b7bb5 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.background-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.background-hearts::before,
+.background-hearts::after {
+    content: '💜';
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.1;
+    animation: floatHeart 15s infinite ease-in-out;
+}
+
+.background-hearts::before {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.background-hearts::after {
+    top: 60%;
+    right: 15%;
+    animation-delay: 5s;
+}
+
+@keyframes floatHeart {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-30px) rotate(10deg); }
+}
+
+.container {
+    text-align: center;
+    z-index: 1;
+    position: relative;
+}
+
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 20px rgba(107, 76, 122, 0.4);
+    animation: fadeInDown 1s ease-out;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-bottom: 3rem;
+    opacity: 0.9;
+    animation: fadeInUp 1s ease-out 0.3s both;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gift-container {
+    margin: 3rem auto;
+    perspective: 1000px;
+}
+
+.gift-box {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.gift-box:hover {
+    transform: scale(1.05);
+    animation: none;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+.gift-lid {
+    width: 100%;
+    height: 100%;
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transform-origin: center;
+}
+
+.gift-box.opening .gift-lid {
+    transform: translateY(-100px) rotateX(45deg) scale(0.8);
+    opacity: 0;
+}
+
+.gift-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 10px 30px rgba(107, 76, 122, 0.5));
+}
+
+.items-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+}
+
+.items-container.show {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+}
+
+.gift-item {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    text-decoration: none;
+    color: var(--lavender-dark);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(107, 76, 122, 0.2);
+    opacity: 0;
+    transform: scale(0.8) translateY(30px);
+    animation: itemAppear 0.6s ease forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+.gift-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    transition: left 0.5s ease;
+}
+
+.gift-item:hover::before {
+    left: 100%;
+}
+
+.gift-item:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(107, 76, 122, 0.3);
+    background: rgba(255, 255, 255, 1);
+}
+
+@keyframes itemAppear {
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.gift-item img {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1rem;
+    transition: transform 0.4s ease;
+}
+
+.gift-item:hover img {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.gift-item span {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--lavender-medium);
+    letter-spacing: 1px;
+}
+
+/* Sparkle effect on hover */
+.gift-item::after {
+    content: '✨';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gift-item:hover::after {
+    opacity: 1;
+    animation: sparkle 1s ease infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.2) rotate(180deg); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .gift-box {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .items-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+    
+    .gift-item img {
+        width: 100px;
+        height: 100px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="background-hearts"></div>
+    
+    <div class="container">
+        <h1 class="title">You've Received a Gift</h1>
+        <p class="subtitle">Click to open your surprise</p>
+        
+        <div class="gift-container">
+            <div class="gift-box" id="giftBox">
+                <div class="gift-lid" id="giftLid">
+                    <img src="../assets/gift-box.svg" alt="Gift Box" class="gift-svg">
+                </div>
+            </div>
+        </div>
+
+        <div class="items-container" id="itemsContainer">
+            <a href="message.html" class="gift-item" style="animation-delay: 0.2s;">
+                <img src="../assets/envelope.svg" alt="Message">
+                <span>Love Letter</span>
+            </a>
+            
+            <a href="chocolate.html" class="gift-item" style="animation-delay: 0.4s;">
+                <img src="../assets/chocolate.svg" alt="Chocolate">
+                <span>Sweet Treats</span>
+            </a>
+            
+            <a href="bouquet.html" class="gift-item" style="animation-delay: 0.6s;">
+                <img src="../assets/flower.svg" alt="Bouquet">
+                <span>Flowers</span>
+            </a>
+            
+            <a href="picture.html" class="gift-item" style="animation-delay: 0.8s;">
+                <img src="../assets/picture-frame.svg" alt="Picture">
+                <span>Memory</span>
+            </a>
+        </div>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

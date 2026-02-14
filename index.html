@@ -54,18 +54,18 @@ body {
     content: '💜';
     position: absolute;
     font-size: 2rem;
-    opacity: 0.1;
+    opacity: 0.15;
     animation: floatHeart 15s infinite ease-in-out;
 }
 
 .background-hearts::before {
-    top: 20%;
+    top: 15%;
     left: 10%;
     animation-delay: 0s;
 }
 
 .background-hearts::after {
-    top: 60%;
+    top: 70%;
     right: 15%;
     animation-delay: 5s;
 }
@@ -79,12 +79,19 @@ body {
     text-align: center;
     z-index: 1;
     position: relative;
-    padding: 1rem;
+    padding: 2rem 1rem;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 .title {
     font-family: 'Playfair Display', serif;
-    font-size: 3rem;
+    font-size: 2.8rem;
     font-weight: 700;
     color: var(--white);
     margin-bottom: 0.5rem;
@@ -94,10 +101,10 @@ body {
 }
 
 .subtitle {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--white);
-    margin-bottom: 2rem;
-    opacity: 0.9;
+    margin-bottom: 2.5rem;
+    opacity: 0.95;
     animation: fadeInUp 1s ease-out 0.3s both;
     font-weight: 300;
     letter-spacing: 1px;
@@ -126,27 +133,26 @@ body {
 }
 
 .gift-container {
-    margin: 2rem auto;
+    margin: 0 auto 2.5rem;
     perspective: 1000px;
 }
 
 .gift-box {
-    width: 250px;
-    height: 250px;
+    width: 220px;
+    height: 220px;
     margin: 0 auto;
     cursor: pointer;
     transition: transform 0.3s ease;
     animation: pulse 2s ease-in-out infinite;
 }
 
-.gift-box:hover {
-    transform: scale(1.05);
-    animation: none;
+.gift-box:active {
+    transform: scale(0.95);
 }
 
 @keyframes pulse {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.03); }
+    50% { transform: scale(1.05); }
 }
 
 .gift-lid {
@@ -157,7 +163,7 @@ body {
 }
 
 .gift-box.opening .gift-lid {
-    transform: translateY(-100px) rotateX(45deg) scale(0.8);
+    transform: translateY(-120px) rotateX(45deg) scale(0.8);
     opacity: 0;
 }
 
@@ -170,19 +176,20 @@ body {
 .items-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    max-width: 350px;
+    gap: 1.2rem;
+    width: 100%;
+    max-width: 320px;
     margin: 0 auto;
     opacity: 0;
     pointer-events: none;
-    transform: translateY(50px);
+    transform: scale(0.8);
     transition: all 0.8s ease;
 }
 
 .items-container.show {
     opacity: 1;
     pointer-events: all;
-    transform: translateY(0);
+    transform: scale(1);
 }
 
 .gift-item {
@@ -195,13 +202,14 @@ body {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: 0 10px 30px rgba(107, 76, 122, 0.2);
     opacity: 0;
-    transform: scale(0.8) translateY(30px);
+    transform: scale(0.5) translateY(50px);
     animation: itemAppear 0.6s ease forwards;
     position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .gift-item::before {
@@ -215,7 +223,7 @@ body {
     transition: left 0.5s ease;
 }
 
-.gift-item:hover::before {
+.gift-item:active::before {
     left: 100%;
 }
 
@@ -231,14 +239,14 @@ body {
 }
 
 .gift-item img {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 0.5rem;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 0.8rem;
     transition: transform 0.4s ease;
 }
 
 .gift-item:active img {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.15) rotate(10deg);
 }
 
 .gift-item span {
@@ -253,8 +261,8 @@ body {
 .gift-item::after {
     content: '✨';
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 8px;
+    right: 8px;
     font-size: 1.2rem;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -262,13 +270,19 @@ body {
 
 .gift-item:active::after {
     opacity: 1;
-    animation: sparkle 1s ease infinite;
+    animation: sparkle 0.6s ease;
 }
 
 @keyframes sparkle {
     0%, 100% { transform: scale(1) rotate(0deg); }
-    50% { transform: scale(1.2) rotate(180deg); }
+    50% { transform: scale(1.3) rotate(180deg); }
 }
+
+/* Stagger animation delays for items */
+.gift-item:nth-child(1) { animation-delay: 0.2s; }
+.gift-item:nth-child(2) { animation-delay: 0.35s; }
+.gift-item:nth-child(3) { animation-delay: 0.5s; }
+.gift-item:nth-child(4) { animation-delay: 0.65s; }
     </style>
 </head>
 <body>
@@ -281,29 +295,29 @@ body {
         <div class="gift-container">
             <div class="gift-box" id="giftBox">
                 <div class="gift-lid" id="giftLid">
-                    <img src="assets/gift-box.svg" alt="Gift Box" class="gift-svg">
+                    <img src="gift-box.svg" alt="Gift Box" class="gift-svg">
                 </div>
             </div>
         </div>
 
         <div class="items-container" id="itemsContainer">
-            <a href="html/message.html" class="gift-item" style="animation-delay: 0.2s;">
-                <img src="assets/envelope.svg" alt="Message">
+            <a href="message.html" class="gift-item">
+                <img src="message.svg" alt="Message">
                 <span>Love Letter</span>
             </a>
             
-            <a href="html/chocolate.html" class="gift-item" style="animation-delay: 0.4s;">
-                <img src="assets/chocolate.svg" alt="Chocolate">
+            <a href="chocolate.html" class="gift-item">
+                <img src="chocolate.svg" alt="Chocolate">
                 <span>Sweet Treats</span>
             </a>
             
-            <a href="html/bouquet.html" class="gift-item" style="animation-delay: 0.6s;">
-                <img src="assets/flower.svg" alt="Bouquet">
+            <a href="bouquet.html" class="gift-item">
+                <img src="flower.svg" alt="Bouquet">
                 <span>Flowers</span>
             </a>
             
-            <a href="html/picture.html" class="gift-item" style="animation-delay: 0.8s;">
-                <img src="assets/picture-frame.svg" alt="Picture">
+            <a href="picture.html" class="gift-item">
+                <img src="picture-frame.svg" alt="Picture">
                 <span>Memory</span>
             </a>
         </div>

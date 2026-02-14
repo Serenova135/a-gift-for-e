@@ -11,9 +11,7 @@
 :root {
     --lavender-dark: #6b4c7a;
     --lavender-medium: #9b7bb5;
-    --lavender-light: #c9aedb;
     --lavender-pale: #e8c5ec;
-    --lavender-super-light: #f0d5f4;
     --white: #ffffff;
 }
 
@@ -38,32 +36,19 @@ body {
     justify-content: center;
 }
 
-.background-pattern {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
-}
-
 .container {
-    max-width: 100%;
+    width: 100%;
     height: 100%;
     z-index: 1;
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    padding: 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .back-button {
-    display: inline-block;
     align-self: flex-start;
     padding: 0.6rem 1.2rem;
     background: rgba(255, 255, 255, 0.95);
@@ -72,49 +57,17 @@ body {
     border-radius: 50px;
     font-size: 1rem;
     font-weight: 500;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(107, 76, 122, 0.2);
     animation: fadeInDown 0.6s ease;
 }
 
-.back-button:active {
-    transform: scale(0.95);
-    box-shadow: 0 3px 10px rgba(107, 76, 122, 0.3);
-}
+.back-button:active { transform: scale(0.95); }
 
 @keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.page-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--white);
-    text-align: center;
-    margin-bottom: 1.5rem;
-    text-shadow: 2px 2px 20px rgba(107, 76, 122, 0.4);
-    animation: fadeInUp 0.8s ease 0.2s both;
-    letter-spacing: 2px;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .content-wrapper {
@@ -126,23 +79,40 @@ body {
     gap: 1.5rem;
 }
 
-.chocolate-svg {
-    width: 150px;
-    height: 150px;
-    filter: drop-shadow(0 10px 30px rgba(107, 76, 122, 0.3));
-    animation: float 3s ease-in-out infinite;
+.page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--white);
+    text-align: center;
+    text-shadow: 2px 2px 20px rgba(107, 76, 122, 0.4);
+    animation: fadeInUp 0.8s ease 0.2s both;
+    letter-spacing: 2px;
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.chocolate-svg {
+    width: 120px;
+    height: 120px;
+    filter: drop-shadow(0 10px 30px rgba(107, 76, 122, 0.3));
+    animation: chocolateDrop 0.8s ease 0.5s both;
+}
+
+@keyframes chocolateDrop {
+    0% { transform: translateY(-100px) rotate(-180deg) scale(0.5); opacity: 0; }
+    60% { transform: translateY(10px) rotate(10deg) scale(1.1); }
+    100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
 }
 
 .chocolates-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.8rem;
-    max-width: 350px;
+    width: 100%;
 }
 
 .chocolate-piece {
@@ -153,20 +123,25 @@ body {
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(107, 76, 122, 0.15);
     opacity: 0;
-    transform: scale(0.8);
-    animation: chocolatePop 0.6s ease forwards;
+    transform: scale(0) rotate(180deg);
+    animation: chocolatePop 0.5s ease forwards;
 }
 
 @keyframes chocolatePop {
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    0% { transform: scale(0) rotate(180deg); opacity: 0; }
+    50% { transform: scale(1.2) rotate(-10deg); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
 }
+
+.chocolate-piece:nth-child(1) { animation-delay: 0.8s; }
+.chocolate-piece:nth-child(2) { animation-delay: 0.95s; }
+.chocolate-piece:nth-child(3) { animation-delay: 1.1s; }
+.chocolate-piece:nth-child(4) { animation-delay: 1.25s; }
+.chocolate-piece:nth-child(5) { animation-delay: 1.4s; }
+.chocolate-piece:nth-child(6) { animation-delay: 1.55s; }
 
 .chocolate-piece:active {
     transform: scale(0.95);
-    box-shadow: 0 3px 10px rgba(107, 76, 122, 0.3);
 }
 
 .chocolate-emoji {
@@ -189,8 +164,7 @@ body {
     padding: 1.5rem;
     box-shadow: 0 10px 30px rgba(107, 76, 122, 0.2);
     text-align: center;
-    animation: fadeInUp 1s ease 0.8s both;
-    max-width: 350px;
+    animation: fadeInUp 1s ease 1.8s both;
 }
 
 .sweet-message {
@@ -211,38 +185,36 @@ body {
     </style>
 </head>
 <body>
-    <div class="background-pattern"></div>
-    
     <div class="container">
-        <a href="../index.html" class="back-button">← Back</a>
-        
-        <h1 class="page-title">Sweet Indulgence</h1>
+        <a href="index.html" class="back-button">← Back</a>
         
         <div class="content-wrapper">
-            <img src="../assets/chocolate.svg" alt="Chocolate Box" class="chocolate-svg">
+            <h1 class="page-title">Sweet Indulgence</h1>
+            
+            <img src="chocolate.svg" alt="Chocolate Box" class="chocolate-svg">
             
             <div class="chocolates-grid">
-                <div class="chocolate-piece" style="animation-delay: 0.1s;">
+                <div class="chocolate-piece">
                     <span class="chocolate-emoji">🍫</span>
                     <p class="chocolate-name">Dark</p>
                 </div>
-                <div class="chocolate-piece" style="animation-delay: 0.2s;">
+                <div class="chocolate-piece">
                     <span class="chocolate-emoji">🍬</span>
                     <p class="chocolate-name">Caramel</p>
                 </div>
-                <div class="chocolate-piece" style="animation-delay: 0.3s;">
+                <div class="chocolate-piece">
                     <span class="chocolate-emoji">🍫</span>
                     <p class="chocolate-name">Hazelnut</p>
                 </div>
-                <div class="chocolate-piece" style="animation-delay: 0.4s;">
+                <div class="chocolate-piece">
                     <span class="chocolate-emoji">🍬</span>
                     <p class="chocolate-name">Strawberry</p>
                 </div>
-                <div class="chocolate-piece" style="animation-delay: 0.5s;">
+                <div class="chocolate-piece">
                     <span class="chocolate-emoji">🍫</span>
                     <p class="chocolate-name">Mint</p>
                 </div>
-                <div class="chocolate-piece" style="animation-delay: 0.6s;">
+                <div class="chocolate-piece">
                     <span class="chocolate-emoji">🍬</span>
                     <p class="chocolate-name">Truffle</p>
                 </div>

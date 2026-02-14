@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Precious Memory 📸</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,13 +23,19 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+
 body {
     font-family: 'Cormorant Garamond', serif;
     background: linear-gradient(135deg, #f0d5f4 0%, #c9aedb 50%, #9b7bb5 100%);
-    min-height: 100vh;
-    padding: 2rem;
-    position: relative;
-    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .sparkles-container {
@@ -86,31 +92,33 @@ body {
 }
 
 .container {
-    max-width: 1000px;
-    margin: 0 auto;
+    max-width: 100%;
+    height: 100%;
     z-index: 1;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
 }
 
 .back-button {
     display: inline-block;
-    padding: 0.8rem 1.5rem;
+    align-self: flex-start;
+    padding: 0.6rem 1.2rem;
     background: rgba(255, 255, 255, 0.95);
     color: var(--lavender-medium);
     text-decoration: none;
     border-radius: 50px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(107, 76, 122, 0.2);
     animation: fadeInDown 0.6s ease;
 }
 
-.back-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(107, 76, 122, 0.3);
-    background: var(--white);
+.back-button:active {
+    transform: scale(0.95);
 }
 
 @keyframes fadeInDown {
@@ -126,11 +134,11 @@ body {
 
 .page-title {
     font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--white);
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
     text-shadow: 2px 2px 20px rgba(107, 76, 122, 0.4);
     animation: fadeInUp 0.8s ease 0.2s both;
     letter-spacing: 2px;
@@ -147,35 +155,18 @@ body {
     }
 }
 
-.frame-container {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 30px;
-    padding: 3rem;
-    box-shadow: 0 20px 60px rgba(107, 76, 122, 0.3);
-    margin-bottom: 2rem;
-    animation: scaleIn 0.8s ease 0.4s both;
-}
-
-@keyframes scaleIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.picture-frame {
-    position: relative;
-    max-width: 500px;
-    margin: 0 auto 3rem;
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
 }
 
 .frame-svg {
-    width: 100%;
-    height: auto;
+    width: 150px;
+    height: 150px;
     filter: drop-shadow(0 10px 30px rgba(107, 76, 122, 0.3));
     animation: tilt 5s ease-in-out infinite;
 }
@@ -185,24 +176,25 @@ body {
     50% { transform: rotate(1deg); }
 }
 
-.photo-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70%;
-}
-
 .polaroid {
     background: var(--white);
-    padding: 15px 15px 40px;
+    padding: 15px 15px 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
     transform: rotate(-2deg);
-    transition: transform 0.4s ease;
+    animation: scaleIn 0.8s ease 0.4s both;
+    max-width: 300px;
 }
 
-.polaroid:hover {
-    transform: rotate(0deg) scale(1.05);
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: rotate(-2deg) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: rotate(-2deg) scale(1);
+    }
 }
 
 .polaroid-image {
@@ -211,8 +203,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    overflow: hidden;
+    border-radius: 3px;
 }
 
 .heart-collage {
@@ -227,23 +218,9 @@ body {
     50% { transform: scale(1.1); }
 }
 
-.heart {
-    display: inline-block;
-    animation: float 3s ease-in-out infinite;
-}
-
-.heart:nth-child(1) { animation-delay: 0s; }
-.heart:nth-child(2) { animation-delay: 0.3s; }
-.heart:nth-child(3) { animation-delay: 0.6s; }
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
 .polaroid-caption {
     font-family: 'Great Vibes', cursive;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: var(--lavender-dark);
     text-align: center;
     margin-top: 10px;
@@ -251,146 +228,78 @@ body {
 
 .memory-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+    max-width: 350px;
 }
 
 .memory-card {
-    background: linear-gradient(135deg, var(--lavender-super-light) 0%, var(--white) 100%);
-    border-radius: 20px;
-    padding: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 1rem 0.5rem;
     text-align: center;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: pointer;
+    transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(107, 76, 122, 0.15);
-    border: 2px solid transparent;
     opacity: 0;
-    transform: scale(0.8) translateY(20px);
+    transform: scale(0.8);
     animation: cardReveal 0.6s ease forwards;
 }
 
 @keyframes cardReveal {
     to {
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: scale(1);
     }
 }
 
-.memory-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 15px 35px rgba(107, 76, 122, 0.3);
-    border-color: var(--lavender-pale);
-    background: linear-gradient(135deg, var(--lavender-pale) 0%, var(--white) 100%);
+.memory-card:active {
+    transform: scale(0.95);
 }
 
 .memory-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    animation: twinkle 2s ease-in-out infinite;
-}
-
-@keyframes twinkle {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.7; transform: scale(1.2); }
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
 }
 
 .memory-title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: var(--lavender-dark);
-    margin-bottom: 0.5rem;
-    letter-spacing: 1px;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.5px;
 }
 
 .memory-text {
-    font-size: 1.1rem;
+    font-size: 0.75rem;
     color: var(--lavender-medium);
     font-style: italic;
-    font-weight: 400;
 }
 
 .message-box {
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 25px;
-    padding: 2.5rem;
-    box-shadow: 0 15px 40px rgba(107, 76, 122, 0.2);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(107, 76, 122, 0.2);
     text-align: center;
     animation: fadeInUp 1s ease 1s both;
+    max-width: 350px;
 }
 
 .picture-message {
-    font-size: 1.4rem;
-    line-height: 1.8;
+    font-size: 1rem;
+    line-height: 1.6;
     color: #4a4a4a;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     font-weight: 400;
 }
 
 .picture-note {
     font-family: 'Great Vibes', cursive;
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     color: var(--lavender-medium);
-    padding-top: 1rem;
+    padding-top: 0.8rem;
     border-top: 2px solid var(--lavender-pale);
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    body {
-        padding: 1rem;
-    }
-    
-    .page-title {
-        font-size: 2.5rem;
-    }
-    
-    .frame-container {
-        padding: 2rem 1.5rem;
-    }
-    
-    .picture-frame {
-        max-width: 350px;
-    }
-    
-    .heart-collage {
-        font-size: 2rem;
-        gap: 0.5rem;
-    }
-    
-    .polaroid-caption {
-        font-size: 1.4rem;
-    }
-    
-    .memory-cards {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .memory-icon {
-        font-size: 2.5rem;
-    }
-    
-    .memory-title {
-        font-size: 1.3rem;
-    }
-    
-    .memory-text {
-        font-size: 1rem;
-    }
-    
-    .message-box {
-        padding: 2rem 1.5rem;
-    }
-    
-    .picture-message {
-        font-size: 1.2rem;
-    }
-    
-    .picture-note {
-        font-size: 1.5rem;
-    }
 }
     </style>
 </head>
@@ -403,61 +312,55 @@ body {
     </div>
     
     <div class="container">
-        <a href="index.html" class="back-button">← Back to Gifts</a>
+        <a href="../index.html" class="back-button">← Back</a>
         
         <h1 class="page-title">Our Precious Moment</h1>
         
-        <div class="frame-container">
-            <div class="picture-frame">
-                <img src="../assets/picture-frame.svg" alt="Picture Frame" class="frame-svg">
-                
-                <div class="photo-content">
-                    <div class="polaroid">
-                        <div class="polaroid-image">
-                            <div class="heart-collage">
-                                <span class="heart">💜</span>
-                                <span class="heart">💖</span>
-                                <span class="heart">💝</span>
-                            </div>
-                        </div>
-                        <div class="polaroid-caption">Us, Forever</div>
+        <div class="content-wrapper">
+            <img src="../assets/picture-frame.svg" alt="Picture Frame" class="frame-svg">
+            
+            <div class="polaroid">
+                <div class="polaroid-image">
+                    <div class="heart-collage">
+                        <span>💜</span>
+                        <span>💖</span>
+                        <span>💝</span>
                     </div>
                 </div>
+                <div class="polaroid-caption">Us, Forever</div>
             </div>
             
             <div class="memory-cards">
                 <div class="memory-card" style="animation-delay: 0.3s;">
                     <div class="memory-icon">🌟</div>
                     <h3 class="memory-title">First Smile</h3>
-                    <p class="memory-text">The moment that started everything</p>
+                    <p class="memory-text">Started it all</p>
                 </div>
                 
                 <div class="memory-card" style="animation-delay: 0.5s;">
                     <div class="memory-icon">💫</div>
                     <h3 class="memory-title">Every Laugh</h3>
-                    <p class="memory-text">Joy that fills my heart daily</p>
+                    <p class="memory-text">Fills my heart</p>
                 </div>
                 
                 <div class="memory-card" style="animation-delay: 0.7s;">
                     <div class="memory-icon">⭐</div>
-                    <h3 class="memory-title">Endless Tomorrows</h3>
-                    <p class="memory-text">Memories we'll create together</p>
+                    <h3 class="memory-title">Tomorrows</h3>
+                    <p class="memory-text">Together always</p>
                 </div>
             </div>
-        </div>
-        
-        <div class="message-box">
-            <p class="picture-message">
-                Every photograph is a story, and ours is my favorite tale. From our first moment 
-                together to this very day, each memory with you is a treasure I hold close to my 
-                heart. You make every moment picture-perfect.
-            </p>
-            <p class="picture-note">
-                Here's to a lifetime of beautiful memories together 💜
-            </p>
+            
+            <div class="message-box">
+                <p class="picture-message">
+                    Every photograph is a story, and ours is my favorite tale. Each memory with you is a treasure I hold close to my heart.
+                </p>
+                <p class="picture-note">
+                    Here's to a lifetime of memories 💜
+                </p>
+            </div>
         </div>
     </div>
 
-    <script src="../js/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

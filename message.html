@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Love Letter 💌</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400;600&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+:root {
+    --lavender-dark: #6b4c7a;
+    --lavender-medium: #9b7bb5;
+    --lavender-light: #c9aedb;
+    --lavender-pale: #e8c5ec;
+    --lavender-super-light: #f0d5f4;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+
+body {
+    font-family: 'Cormorant Garamond', serif;
+    background: linear-gradient(135deg, #f0d5f4 0%, #c9aedb 50%, #9b7bb5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hearts-float {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 1.5rem;
+    opacity: 0;
+    animation: floatUp 6s ease-in infinite;
+}
+
+.floating-heart:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.floating-heart:nth-child(2) {
+    left: 40%;
+    animation-delay: 2s;
+}
+
+.floating-heart:nth-child(3) {
+    left: 70%;
+    animation-delay: 4s;
+}
+
+.floating-heart:nth-child(4) {
+    left: 85%;
+    animation-delay: 1s;
+}
+
+@keyframes floatUp {
+    0% {
+        bottom: -10%;
+        opacity: 0;
+        transform: translateX(0) scale(0.5);
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        bottom: 110%;
+        opacity: 0;
+        transform: translateX(20px) scale(1);
+    }
+}
+
+.container {
+    max-width: 100%;
+    height: 100%;
+    z-index: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.back-button {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 0.6rem 1.2rem;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--lavender-medium);
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(107, 76, 122, 0.2);
+    animation: fadeInDown 0.6s ease;
+}
+
+.back-button:active {
+    transform: scale(0.95);
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 20px rgba(107, 76, 122, 0.4);
+    animation: fadeInUp 0.8s ease 0.2s both;
+    letter-spacing: 2px;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.envelope-svg {
+    width: 150px;
+    height: 150px;
+    filter: drop-shadow(0 10px 30px rgba(107, 76, 122, 0.3));
+    animation: sway 3s ease-in-out infinite;
+}
+
+@keyframes sway {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+}
+
+.letter-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(107, 76, 122, 0.2);
+    animation: scaleIn 0.8s ease 0.4s both;
+    max-width: 350px;
+    width: 100%;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.letter-greeting {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: var(--lavender-dark);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.letter-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #4a4a4a;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+}
+
+.letter-closing {
+    text-align: right;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: var(--lavender-medium);
+    font-weight: 700;
+}
+
+.heart-seal {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 1rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+    </style>
+</head>
+<body>
+    <div class="hearts-float">
+        <div class="floating-heart">💜</div>
+        <div class="floating-heart">💖</div>
+        <div class="floating-heart">💝</div>
+        <div class="floating-heart">💕</div>
+    </div>
+    
+    <div class="container">
+        <a href="../index.html" class="back-button">← Back</a>
+        
+        <h1 class="page-title">A Letter From My Heart</h1>
+        
+        <div class="content-wrapper">
+            <img src="../assets/envelope.svg" alt="Envelope" class="envelope-svg">
+            
+            <div class="letter-container">
+                <div class="letter-greeting">My Dearest Love,</div>
+                
+                <p class="letter-text">
+                    Words can barely capture what you mean to me. From the moment we met, 
+                    you've filled my life with joy, laughter, and endless love. Every day 
+                    with you is a gift I treasure beyond measure.
+                </p>
+                
+                <p class="letter-text">
+                    You are my sunshine on cloudy days, my comfort in difficult times, 
+                    and my greatest adventure. Thank you for being you, for loving me, 
+                    and for making every moment magical.
+                </p>
+                
+                <div class="letter-closing">
+                    Forever Yours 💜
+                </div>
+                
+                <div class="heart-seal">💌</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

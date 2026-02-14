@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Flower Bouquet 💐</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,13 +23,19 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+
 body {
     font-family: 'Cormorant Garamond', serif;
     background: linear-gradient(135deg, #f0d5f4 0%, #c9aedb 50%, #9b7bb5 100%);
-    min-height: 100vh;
-    padding: 2rem;
-    position: relative;
-    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .petals-container {
@@ -95,31 +101,34 @@ body {
 }
 
 .container {
-    max-width: 1000px;
-    margin: 0 auto;
+    max-width: 100%;
+    height: 100%;
     z-index: 1;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
 }
 
 .back-button {
     display: inline-block;
-    padding: 0.8rem 1.5rem;
+    align-self: flex-start;
+    padding: 0.6rem 1.2rem;
     background: rgba(255, 255, 255, 0.95);
     color: var(--lavender-medium);
     text-decoration: none;
     border-radius: 50px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(107, 76, 122, 0.2);
     animation: fadeInDown 0.6s ease;
 }
 
-.back-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(107, 76, 122, 0.3);
-    background: var(--white);
+.back-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 3px 10px rgba(107, 76, 122, 0.3);
 }
 
 @keyframes fadeInDown {
@@ -135,11 +144,11 @@ body {
 
 .page-title {
     font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--white);
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
     text-shadow: 2px 2px 20px rgba(107, 76, 122, 0.4);
     animation: fadeInUp 0.8s ease 0.2s both;
     letter-spacing: 2px;
@@ -156,31 +165,18 @@ body {
     }
 }
 
-.bouquet-container {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 30px;
-    padding: 3rem;
-    box-shadow: 0 20px 60px rgba(107, 76, 122, 0.3);
-    margin-bottom: 2rem;
-    animation: scaleIn 0.8s ease 0.4s both;
-}
-
-@keyframes scaleIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
 }
 
 .bouquet-svg {
-    width: 280px;
-    height: 280px;
-    display: block;
-    margin: 0 auto 3rem;
+    width: 150px;
+    height: 150px;
     filter: drop-shadow(0 10px 30px rgba(107, 76, 122, 0.3));
     animation: sway 4s ease-in-out infinite;
 }
@@ -192,71 +188,52 @@ body {
 
 .flower-meanings {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    max-width: 900px;
-    margin: 0 auto;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+    width: 100%;
+    max-width: 350px;
 }
 
 .flower-card {
-    background: linear-gradient(135deg, var(--lavender-super-light) 0%, var(--white) 100%);
-    border-radius: 20px;
-    padding: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 1rem 0.5rem;
     text-align: center;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: pointer;
+    transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(107, 76, 122, 0.15);
-    border: 2px solid transparent;
     opacity: 0;
-    transform: scale(0.8) translateY(20px);
+    transform: scale(0.8);
     animation: flowerGrow 0.6s ease forwards;
 }
 
 @keyframes flowerGrow {
     to {
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: scale(1);
     }
 }
 
-.flower-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 15px 35px rgba(107, 76, 122, 0.3);
-    border-color: var(--lavender-pale);
-    background: linear-gradient(135deg, var(--lavender-pale) 0%, var(--white) 100%);
+.flower-card:active {
+    transform: scale(0.95);
+    box-shadow: 0 3px 10px rgba(107, 76, 122, 0.3);
 }
 
 .flower-icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    animation: bloom 2s ease-in-out infinite;
-}
-
-.flower-card:hover .flower-icon {
-    animation: spin 0.8s ease;
-}
-
-@keyframes bloom {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-@keyframes spin {
-    from { transform: rotate(0deg) scale(1); }
-    to { transform: rotate(360deg) scale(1.2); }
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .flower-type {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--lavender-dark);
-    margin-bottom: 0.5rem;
-    letter-spacing: 1px;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.5px;
 }
 
 .flower-meaning {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     color: var(--lavender-medium);
     font-style: italic;
     font-weight: 400;
@@ -264,81 +241,29 @@ body {
 
 .message-box {
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 25px;
-    padding: 2.5rem;
-    box-shadow: 0 15px 40px rgba(107, 76, 122, 0.2);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(107, 76, 122, 0.2);
     text-align: center;
     animation: fadeInUp 1s ease 1s both;
+    max-width: 350px;
 }
 
 .flower-message {
-    font-size: 1.4rem;
-    line-height: 1.8;
+    font-size: 1rem;
+    line-height: 1.6;
     color: #4a4a4a;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     font-weight: 400;
 }
 
 .flower-quote {
     font-family: 'Parisienne', cursive;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     color: var(--lavender-medium);
     font-style: italic;
-    padding-top: 1rem;
+    padding-top: 0.8rem;
     border-top: 2px solid var(--lavender-pale);
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    body {
-        padding: 1rem;
-    }
-    
-    .page-title {
-        font-size: 2.5rem;
-    }
-    
-    .bouquet-container {
-        padding: 2rem 1.5rem;
-    }
-    
-    .bouquet-svg {
-        width: 220px;
-        height: 220px;
-    }
-    
-    .flower-meanings {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
-    
-    .flower-card {
-        padding: 1.5rem 1rem;
-    }
-    
-    .flower-icon {
-        font-size: 3rem;
-    }
-    
-    .flower-type {
-        font-size: 1.2rem;
-    }
-    
-    .flower-meaning {
-        font-size: 1rem;
-    }
-    
-    .message-box {
-        padding: 2rem 1.5rem;
-    }
-    
-    .flower-message {
-        font-size: 1.2rem;
-    }
-    
-    .flower-quote {
-        font-size: 1.3rem;
-    }
 }
     </style>
 </head>
@@ -352,24 +277,24 @@ body {
     </div>
     
     <div class="container">
-        <a href="index.html" class="back-button">← Back to Gifts</a>
+        <a href="../index.html" class="back-button">← Back</a>
         
         <h1 class="page-title">A Bouquet of Love</h1>
         
-        <div class="bouquet-container">
+        <div class="content-wrapper">
             <img src="../assets/flower.svg" alt="Flower Bouquet" class="bouquet-svg">
             
             <div class="flower-meanings">
                 <div class="flower-card" style="animation-delay: 0.2s;">
                     <div class="flower-icon">🌸</div>
                     <h3 class="flower-type">Lavender</h3>
-                    <p class="flower-meaning">Devotion & Serenity</p>
+                    <p class="flower-meaning">Devotion</p>
                 </div>
                 
                 <div class="flower-card" style="animation-delay: 0.4s;">
                     <div class="flower-icon">🌺</div>
                     <h3 class="flower-type">Hibiscus</h3>
-                    <p class="flower-meaning">Delicate Beauty</p>
+                    <p class="flower-meaning">Beauty</p>
                 </div>
                 
                 <div class="flower-card" style="animation-delay: 0.6s;">
@@ -381,23 +306,21 @@ body {
                 <div class="flower-card" style="animation-delay: 0.8s;">
                     <div class="flower-icon">🌹</div>
                     <h3 class="flower-type">Rose</h3>
-                    <p class="flower-meaning">Eternal Romance</p>
+                    <p class="flower-meaning">Romance</p>
                 </div>
             </div>
-        </div>
-        
-        <div class="message-box">
-            <p class="flower-message">
-                Like these flowers, my love for you blooms endlessly. Each petal represents 
-                a cherished memory, each color reflects a different facet of what makes you 
-                extraordinary. You bring beauty and joy into my life every single day.
-            </p>
-            <p class="flower-quote">
-                "Where flowers bloom, so does hope." — And you are my endless spring.
-            </p>
+            
+            <div class="message-box">
+                <p class="flower-message">
+                    Like these flowers, my love for you blooms endlessly. You bring beauty and joy into my life every single day.
+                </p>
+                <p class="flower-quote">
+                    "Where flowers bloom, so does hope."
+                </p>
+            </div>
         </div>
     </div>
 
-    <script src="../js/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

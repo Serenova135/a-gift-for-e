@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Gift For You 💝</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Valentine's 💝</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
@@ -23,15 +23,19 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+
 body {
     font-family: 'Cormorant Garamond', serif;
     background: linear-gradient(135deg, #f0d5f4 0%, #c9aedb 50%, #9b7bb5 100%);
-    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow-x: hidden;
-    position: relative;
 }
 
 .background-hearts {
@@ -75,23 +79,24 @@ body {
     text-align: center;
     z-index: 1;
     position: relative;
+    padding: 1rem;
 }
 
 .title {
     font-family: 'Playfair Display', serif;
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 700;
     color: var(--white);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     text-shadow: 2px 2px 20px rgba(107, 76, 122, 0.4);
     animation: fadeInDown 1s ease-out;
     letter-spacing: 2px;
 }
 
 .subtitle {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: var(--white);
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     opacity: 0.9;
     animation: fadeInUp 1s ease-out 0.3s both;
     font-weight: 300;
@@ -121,13 +126,13 @@ body {
 }
 
 .gift-container {
-    margin: 3rem auto;
+    margin: 2rem auto;
     perspective: 1000px;
 }
 
 .gift-box {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     margin: 0 auto;
     cursor: pointer;
     transition: transform 0.3s ease;
@@ -165,8 +170,8 @@ body {
 .items-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    max-width: 600px;
+    gap: 1rem;
+    max-width: 350px;
     margin: 0 auto;
     opacity: 0;
     pointer-events: none;
@@ -184,7 +189,7 @@ body {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    padding: 2rem;
+    padding: 1.5rem 1rem;
     text-decoration: none;
     color: var(--lavender-dark);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -194,6 +199,9 @@ body {
     animation: itemAppear 0.6s ease forwards;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .gift-item::before {
@@ -211,10 +219,8 @@ body {
     left: 100%;
 }
 
-.gift-item:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 20px 40px rgba(107, 76, 122, 0.3);
-    background: rgba(255, 255, 255, 1);
+.gift-item:active {
+    transform: scale(0.95);
 }
 
 @keyframes itemAppear {
@@ -225,37 +231,36 @@ body {
 }
 
 .gift-item img {
-    width: 120px;
-    height: 120px;
-    margin-bottom: 1rem;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 0.5rem;
     transition: transform 0.4s ease;
 }
 
-.gift-item:hover img {
+.gift-item:active img {
     transform: scale(1.1) rotate(5deg);
 }
 
 .gift-item span {
     display: block;
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: var(--lavender-medium);
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
-/* Sparkle effect on hover */
 .gift-item::after {
     content: '✨';
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-.gift-item:hover::after {
+.gift-item:active::after {
     opacity: 1;
     animation: sparkle 1s ease infinite;
 }
@@ -264,41 +269,14 @@ body {
     0%, 100% { transform: scale(1) rotate(0deg); }
     50% { transform: scale(1.2) rotate(180deg); }
 }
-
-/* Responsive design */
-@media (max-width: 768px) {
-    .title {
-        font-size: 2.5rem;
-    }
-    
-    .subtitle {
-        font-size: 1.2rem;
-    }
-    
-    .gift-box {
-        width: 250px;
-        height: 250px;
-    }
-    
-    .items-container {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        padding: 0 1rem;
-    }
-    
-    .gift-item img {
-        width: 100px;
-        height: 100px;
-    }
-}
     </style>
 </head>
 <body>
     <div class="background-hearts"></div>
     
     <div class="container">
-        <h1 class="title">You've Received a Gift</h1>
-        <p class="subtitle">Click to open your surprise</p>
+        <h1 class="title">Happy Valentine's</h1>
+        <p class="subtitle">Tap to open your surprise</p>
         
         <div class="gift-container">
             <div class="gift-box" id="giftBox">
@@ -331,6 +309,6 @@ body {
         </div>
     </div>
 
-    <script src="js/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

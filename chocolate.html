@@ -23,39 +23,33 @@
 
 html, body {
     height: 100%;
-    overflow: hidden;
-    position: fixed;
     width: 100%;
 }
 
 body {
     font-family: 'Cormorant Garamond', serif;
     background: linear-gradient(135deg, #f0d5f4 0%, #c9aedb 50%, #9b7bb5 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .container {
-    width: 100%;
-    height: 100%;
+    min-height: 100vh;
     z-index: 1;
     position: relative;
-    display: flex;
-    flex-direction: column;
     padding: 1.5rem;
     max-width: 400px;
     margin: 0 auto;
 }
 
 .back-button {
-    align-self: flex-start;
+    display: inline-block;
     padding: 0.6rem 1.2rem;
     background: rgba(255, 255, 255, 0.95);
     color: var(--lavender-medium);
     text-decoration: none;
     border-radius: 50px;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 500;
     margin-bottom: 1.5rem;
     transition: all 0.3s ease;
@@ -70,24 +64,16 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-.content-wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-}
-
 .page-title {
     font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--white);
     text-align: center;
     text-shadow: 2px 2px 20px rgba(107, 76, 122, 0.4);
     animation: fadeInUp 0.8s ease 0.2s both;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
+    margin-bottom: 1.5rem;
 }
 
 @keyframes fadeInUp {
@@ -96,8 +82,10 @@ body {
 }
 
 .chocolate-svg {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 0 auto 1.5rem;
     filter: drop-shadow(0 10px 30px rgba(107, 76, 122, 0.3));
     animation: chocolateDrop 0.8s ease 0.5s both;
 }
@@ -108,11 +96,20 @@ body {
     100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
 }
 
+.instruction {
+    text-align: center;
+    color: var(--white);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+    animation: fadeInUp 1s ease 1.5s both;
+}
+
 .chocolates-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.8rem;
-    width: 100%;
+    margin-bottom: 1.5rem;
 }
 
 .chocolate-piece {
@@ -125,6 +122,9 @@ body {
     opacity: 0;
     transform: scale(0) rotate(180deg);
     animation: chocolatePop 0.5s ease forwards;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
 }
 
 @keyframes chocolatePop {
@@ -144,10 +144,21 @@ body {
     transform: scale(0.95);
 }
 
+.chocolate-piece.opened {
+    background: linear-gradient(135deg, #ffd4e5 0%, #ffe8f0 100%);
+    pointer-events: none;
+}
+
 .chocolate-emoji {
     font-size: 2.5rem;
     display: block;
     margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.chocolate-piece.opened .chocolate-emoji {
+    transform: scale(0);
+    opacity: 0;
 }
 
 .chocolate-name {
@@ -156,6 +167,36 @@ body {
     font-weight: 600;
     color: var(--lavender-dark);
     letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.chocolate-piece.opened .chocolate-name {
+    opacity: 0;
+}
+
+.sweet-message-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--lavender-dark);
+    text-align: center;
+    opacity: 0;
+    padding: 0.5rem;
+    line-height: 1.4;
+}
+
+.chocolate-piece.opened .sweet-message-inner {
+    animation: popMessage 0.5s ease forwards;
+}
+
+@keyframes popMessage {
+    0% { transform: translate(-50%, -50%) scale(0) rotate(-10deg); opacity: 0; }
+    60% { transform: translate(-50%, -50%) scale(1.2) rotate(5deg); }
+    100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
 }
 
 .message-box {
@@ -165,11 +206,12 @@ body {
     box-shadow: 0 10px 30px rgba(107, 76, 122, 0.2);
     text-align: center;
     animation: fadeInUp 1s ease 1.8s both;
+    margin-bottom: 2rem;
 }
 
 .sweet-message {
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 1.05rem;
+    line-height: 1.7;
     color: #4a4a4a;
     margin-bottom: 1rem;
     font-weight: 400;
@@ -188,46 +230,66 @@ body {
     <div class="container">
         <a href="index.html" class="back-button">← Back</a>
         
-        <div class="content-wrapper">
-            <h1 class="page-title">Sweet Indulgence</h1>
-            
-            <img src="chocolate.svg" alt="Chocolate Box" class="chocolate-svg">
-            
-            <div class="chocolates-grid">
-                <div class="chocolate-piece">
-                    <span class="chocolate-emoji">🍫</span>
-                    <p class="chocolate-name">Dark</p>
-                </div>
-                <div class="chocolate-piece">
-                    <span class="chocolate-emoji">🍬</span>
-                    <p class="chocolate-name">Caramel</p>
-                </div>
-                <div class="chocolate-piece">
-                    <span class="chocolate-emoji">🍫</span>
-                    <p class="chocolate-name">Hazelnut</p>
-                </div>
-                <div class="chocolate-piece">
-                    <span class="chocolate-emoji">🍬</span>
-                    <p class="chocolate-name">Strawberry</p>
-                </div>
-                <div class="chocolate-piece">
-                    <span class="chocolate-emoji">🍫</span>
-                    <p class="chocolate-name">Mint</p>
-                </div>
-                <div class="chocolate-piece">
-                    <span class="chocolate-emoji">🍬</span>
-                    <p class="chocolate-name">Truffle</p>
-                </div>
+        <h1 class="page-title">Sweet Indulgence</h1>
+        
+        <img src="chocolate.svg" alt="Chocolate Box" class="chocolate-svg">
+        
+        <p class="instruction">✨ Tap each chocolate to unwrap a sweet message ✨</p>
+        
+        <div class="chocolates-grid">
+            <div class="chocolate-piece" data-message="You're<br>pretty ✨">
+                <span class="chocolate-emoji">🍫</span>
+                <p class="chocolate-name">Dark</p>
+                <div class="sweet-message-inner"></div>
             </div>
-            
-            <div class="message-box">
-                <p class="sweet-message">
-                    Life with you is sweeter than the finest chocolate. Each moment we share is a treasure, each smile you give me is pure bliss.
-                </p>
-                <p class="sweet-note">💜 Enjoy every bite 💜</p>
+            <div class="chocolate-piece" data-message="I appreciate<br>you 💜">
+                <span class="chocolate-emoji">🍬</span>
+                <p class="chocolate-name">Caramel</p>
+                <div class="sweet-message-inner"></div>
+            </div>
+            <div class="chocolate-piece" data-message="I'm glad<br>you exist 🌟">
+                <span class="chocolate-emoji">🍫</span>
+                <p class="chocolate-name">Hazelnut</p>
+                <div class="sweet-message-inner"></div>
+            </div>
+            <div class="chocolate-piece" data-message="You're Worth it 😊">
+                <span class="chocolate-emoji">🍬</span>
+                <p class="chocolate-name">Strawberry</p>
+                <div class="sweet-message-inner"></div>
+            </div>
+            <div class="chocolate-piece" data-message="You're<br>amazing 💫">
+                <span class="chocolate-emoji">🍫</span>
+                <p class="chocolate-name">Mint</p>
+                <div class="sweet-message-inner"></div>
+            </div>
+            <div class="chocolate-piece" data-message="You're<br>special 💖">
+                <span class="chocolate-emoji">🍬</span>
+                <p class="chocolate-name">Truffle</p>
+                <div class="sweet-message-inner"></div>
             </div>
         </div>
+        
+        <div class="message-box">
+            <p class="sweet-message">
+                Heto chocolate para sa iyo pero huwag masiyadong sobra ha 
+                sige ka baka magka cavities ka 
+            </p>
+            <p class="sweet-note">💜</p>
+        </div>
     </div>
+
+    <script>
+        document.querySelectorAll('.chocolate-piece').forEach(piece => {
+            piece.addEventListener('click', function() {
+                if (!this.classList.contains('opened')) {
+                    const message = this.getAttribute('data-message');
+                    const messageDiv = this.querySelector('.sweet-message-inner');
+                    messageDiv.innerHTML = message;
+                    this.classList.add('opened');
+                }
+            });
+        });
+    </script>
 
     <script src="script.js"></script>
 </body>

@@ -28,7 +28,7 @@ html, body {
 
 body {
     font-family: 'Cormorant Garamond', serif;
-    background: linear-gradient(135deg, #f0d5f4 0%, #c9aedb 50%, #9b7bb5 100%);
+    background: linear-gradient(135deg, #f5e6f8 0%, #e8d5f0 50%, #d4b8e0 100%);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
@@ -212,24 +212,66 @@ body {
 }
 
 .polaroid-image {
-    background: linear-gradient(135deg, #f0d5f4 0%, #e8c5ec 100%);
+    background: linear-gradient(135deg, #ffe6f0 0%, #ffd4e5 100%);
     aspect-ratio: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 3px;
+    position: relative;
 }
 
-.heart-collage {
+.couple-illustration {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 4rem;
+    animation: coupleAppear 1s ease 2s both;
+}
+
+@keyframes coupleAppear {
+    0% { opacity: 0; transform: scale(0.5); }
+    60% { transform: scale(1.1); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.boy {
+    position: relative;
+    animation: boyWave 2s ease 3s infinite;
+}
+
+@keyframes boyWave {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+}
+
+.girl {
+    position: relative;
+    animation: girlWave 2s ease 3.5s infinite;
+}
+
+@keyframes girlWave {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    75% { transform: rotate(-5deg); }
+}
+
+.floating-hearts {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     gap: 1rem;
-    font-size: 3rem;
-    animation: heartPulse 2s ease 2s infinite;
+    font-size: 1.5rem;
+    animation: heartsFloat 3s ease 2.5s infinite;
 }
 
-@keyframes heartPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.15); }
+@keyframes heartsFloat {
+    0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0; }
+    50% { transform: translateX(-50%) translateY(-30px); opacity: 1; }
 }
 
 .polaroid-caption {
@@ -340,10 +382,14 @@ body {
         
         <div class="polaroid">
             <div class="polaroid-image">
-                <div class="heart-collage">
-                    <span>💜</span>
+                <div class="floating-hearts">
+                    <span>💕</span>
                     <span>💖</span>
-                    <span>💝</span>
+                    <span>💕</span>
+                </div>
+                <div class="couple-illustration">
+                    <span class="boy">👦🏻</span>
+                    <span class="girl">👧🏻</span>
                 </div>
             </div>
             <div class="polaroid-caption">Maybe Us?</div>
@@ -352,20 +398,20 @@ body {
         <div class="memory-cards">
             <div class="memory-card">
                 <div class="memory-icon">🌟</div>
-                <h3 class="memory-title">Captured</h3>
-                <p class="memory-text">Ill always remember this</p>
+                <h3 class="memory-title">First Date</h3>
+                <p class="memory-text">Let's make it happen</p>
             </div>
             
             <div class="memory-card">
                 <div class="memory-icon">💫</div>
-                <h3 class="memory-title">Snapshot</h3>
-                <p class="memory-text">This made me smile</p>
+                <h3 class="memory-title">More Laughs</h3>
+                <p class="memory-text">I love your smile</p>
             </div>
             
             <div class="memory-card">
                 <div class="memory-icon">⭐</div>
-                <h3 class="memory-title">Look!</h3>
-                <p class="memory-text">This made me think of you</p>
+                <h3 class="memory-title">New Memories</h3>
+                <p class="memory-text">Together</p>
             </div>
         </div>
         

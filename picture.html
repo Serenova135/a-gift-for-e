@@ -55,64 +55,69 @@ body {
     100% { opacity: 0; }
 }
 
-.capture-message {
+.captured-photo {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, 0.98);
-    padding: 2rem;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(107, 76, 122, 0.4);
     z-index: 10000;
     opacity: 0;
     pointer-events: none;
     max-width: 90%;
+    max-height: 90vh;
+}
+
+.captured-photo.show {
+    animation: photoAppear 0.8s ease 0.3s forwards;
+}
+
+@keyframes photoAppear {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5) rotate(-10deg); }
+    70% { opacity: 1; transform: translate(-50%, -50%) scale(1.05) rotate(2deg); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+}
+
+.photo-frame {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.photo-frame img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 5px;
+    max-height: 60vh;
+    object-fit: cover;
+}
+
+.photo-message {
     text-align: center;
-}
-
-.capture-message.show {
-    animation: popIn 0.6s ease 0.3s forwards;
-}
-
-@keyframes popIn {
-    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-    70% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-}
-
-.capture-message-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
+    margin-top: 15px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.8rem;
     color: var(--lavender-dark);
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    line-height: 1.4;
 }
 
-.capture-message-emoji {
-    font-size: 2.5rem;
-    animation: heartbeat 1s ease infinite;
-}
-
-@keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-}
-
-.close-message {
-    margin-top: 1rem;
-    padding: 0.6rem 1.5rem;
+.close-photo {
+    margin-top: 15px;
+    padding: 0.8rem 2rem;
     background: var(--lavender-medium);
     color: white;
     border: none;
     border-radius: 50px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Cormorant Garamond', serif;
 }
 
-.close-message:active {
+.close-photo:active {
     transform: scale(0.95);
 }
 
@@ -164,9 +169,22 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
+.camera-section {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.camera-instruction {
+    color: var(--white);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    opacity: 0.95;
+    animation: fadeInUp 0.8s ease 0.5s both;
+}
+
 .camera-button {
     display: block;
-    margin: 0 auto 1.5rem;
+    margin: 0 auto;
     width: 100px;
     height: 100px;
     background: rgba(255, 255, 255, 0.95);
@@ -175,11 +193,30 @@ body {
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(107, 76, 122, 0.3);
     transition: all 0.3s ease;
-    animation: pictureFlash 0.8s ease 0.5s both;
+    animation: pictureFlash 0.8s ease 0.7s both;
+    position: relative;
 }
 
 .camera-button:active {
     transform: scale(0.9);
+}
+
+.camera-button::after {
+    content: 'Tap to capture 📸';
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    color: var(--white);
+    font-size: 0.9rem;
+    opacity: 0.9;
+    animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
 }
 
 .camera-button img {
@@ -201,7 +238,7 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     transform: rotate(-2deg);
-    animation: polaroidSlide 1s ease 0.8s both;
+    animation: polaroidSlide 1s ease 1s both;
     max-width: 280px;
     margin: 0 auto 1.5rem;
 }
@@ -305,9 +342,9 @@ body {
     to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.memory-card:nth-child(1) { animation-delay: 1.2s; }
-.memory-card:nth-child(2) { animation-delay: 1.35s; }
-.memory-card:nth-child(3) { animation-delay: 1.5s; }
+.memory-card:nth-child(1) { animation-delay: 1.4s; }
+.memory-card:nth-child(2) { animation-delay: 1.55s; }
+.memory-card:nth-child(3) { animation-delay: 1.7s; }
 
 .memory-card:active { transform: scale(0.95); }
 
@@ -337,7 +374,7 @@ body {
     padding: 1.5rem;
     box-shadow: 0 10px 30px rgba(107, 76, 122, 0.2);
     text-align: center;
-    animation: fadeInUp 1s ease 1.7s both;
+    animation: fadeInUp 1s ease 1.9s both;
     margin-bottom: 2rem;
 }
 
@@ -361,14 +398,12 @@ body {
 <body>
     <div class="camera-flash" id="flash"></div>
     
-    <div class="capture-message" id="captureMessage">
-        <div class="capture-message-text">
-            Look! 😍<br>
-            You're so pretty,<br>
-            my gosh! 💕
+    <div class="captured-photo" id="capturedPhoto">
+        <div class="photo-frame">
+            <img src="ellen.jpg" alt="You">
+            <div class="photo-message">So prettyyy! 💕</div>
+            <button class="close-photo" onclick="closePhoto()">Close</button>
         </div>
-        <div class="capture-message-emoji">✨💖✨</div>
-        <button class="close-message" onclick="closeMessage()">Continue</button>
     </div>
     
     <div class="container">
@@ -376,9 +411,12 @@ body {
         
         <h1 class="page-title">Looking Forward</h1>
         
-        <button class="camera-button" onclick="takePicture()">
-            <img src="picture-frame.svg" alt="Camera">
-        </button>
+        <div class="camera-section">
+            <p class="camera-instruction">✨ Take a picture ✨</p>
+            <button class="camera-button" onclick="takePicture()">
+                <img src="picture-frame.svg" alt="Camera">
+            </button>
+        </div>
         
         <div class="polaroid">
             <div class="polaroid-image">
@@ -399,7 +437,7 @@ body {
             <div class="memory-card">
                 <div class="memory-icon">🌟</div>
                 <h3 class="memory-title">Captured</h3>
-                <p class="memory-text">Ill always remember this</p>
+                <p class="memory-text">I'll always remember this</p>
             </div>
             
             <div class="memory-card">
@@ -429,14 +467,15 @@ body {
     <script>
         function takePicture() {
             const flash = document.getElementById('flash');
-            const message = document.getElementById('captureMessage');
+            const photo = document.getElementById('capturedPhoto');
             
             // Flash effect
             flash.classList.add('active');
             
-            // Show message after flash
+            // Show photo after flash
             setTimeout(() => {
-                message.classList.add('show');
+                photo.classList.add('show');
+                photo.style.pointerEvents = 'all';
             }, 500);
             
             // Remove flash class
@@ -445,8 +484,10 @@ body {
             }, 600);
         }
         
-        function closeMessage() {
-            document.getElementById('captureMessage').classList.remove('show');
+        function closePhoto() {
+            const photo = document.getElementById('capturedPhoto');
+            photo.classList.remove('show');
+            photo.style.pointerEvents = 'none';
         }
     </script>
 

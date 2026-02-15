@@ -171,20 +171,24 @@ body {
 
 .camera-section {
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 3rem;
 }
 
 .camera-instruction {
     color: var(--white);
     font-size: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
     opacity: 0.95;
     animation: fadeInUp 0.8s ease 0.5s both;
+    text-shadow: 1px 1px 10px rgba(107, 76, 122, 0.3);
+}
+
+.camera-button-wrapper {
+    position: relative;
+    display: inline-block;
 }
 
 .camera-button {
-    display: block;
-    margin: 0 auto;
     width: 100px;
     height: 100px;
     background: rgba(255, 255, 255, 0.95);
@@ -194,34 +198,29 @@ body {
     box-shadow: 0 10px 30px rgba(107, 76, 122, 0.3);
     transition: all 0.3s ease;
     animation: pictureFlash 0.8s ease 0.7s both;
-    position: relative;
 }
 
 .camera-button:active {
     transform: scale(0.9);
 }
 
-.camera-button::after {
-    content: 'Tap to capture 📸';
-    position: absolute;
-    bottom: -35px;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
+.camera-button img {
+    width: 70px;
+    height: 70px;
+}
+
+.tap-instruction {
+    margin-top: 1rem;
     color: var(--white);
     font-size: 0.9rem;
     opacity: 0.9;
     animation: pulse 2s ease infinite;
+    text-shadow: 1px 1px 8px rgba(107, 76, 122, 0.3);
 }
 
 @keyframes pulse {
     0%, 100% { opacity: 0.7; }
     50% { opacity: 1; }
-}
-
-.camera-button img {
-    width: 70px;
-    height: 70px;
 }
 
 @keyframes pictureFlash {
@@ -240,7 +239,7 @@ body {
     transform: rotate(-2deg);
     animation: polaroidSlide 1s ease 1s both;
     max-width: 280px;
-    margin: 0 auto 1.5rem;
+    margin: 0 auto 2rem;
 }
 
 @keyframes polaroidSlide {
@@ -323,19 +322,19 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.8rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .memory-card {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 15px;
-    padding: 1rem 0.5rem;
-    text-align: center;
+    padding: 0;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(107, 76, 122, 0.15);
     opacity: 0;
     transform: translateY(50px) scale(0.8);
     animation: cardReveal 0.6s ease forwards;
+    overflow: hidden;
 }
 
 @keyframes cardReveal {
@@ -348,24 +347,12 @@ body {
 
 .memory-card:active { transform: scale(0.95); }
 
-.memory-icon {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-}
-
-.memory-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--lavender-dark);
-    margin-bottom: 0.3rem;
-    letter-spacing: 0.5px;
-}
-
-.memory-text {
-    font-size: 0.75rem;
-    color: var(--lavender-medium);
-    font-style: italic;
+.memory-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    display: block;
+    border-radius: 15px;
 }
 
 .message-box {
@@ -413,9 +400,12 @@ body {
         
         <div class="camera-section">
             <p class="camera-instruction">✨ Take a picture ✨</p>
-            <button class="camera-button" onclick="takePicture()">
-                <img src="picture-frame.svg" alt="Camera">
-            </button>
+            <div class="camera-button-wrapper">
+                <button class="camera-button" onclick="takePicture()">
+                    <img src="picture-frame.svg" alt="Camera">
+                </button>
+                <p class="tap-instruction">Tap to capture 📸</p>
+            </div>
         </div>
         
         <div class="polaroid">
@@ -435,21 +425,15 @@ body {
         
         <div class="memory-cards">
             <div class="memory-card">
-                <div class="memory-icon">🌟</div>
-                <h3 class="memory-title">Captured</h3>
-                <p class="memory-text">I'll always remember this</p>
+                <img src="1.jpeg" alt="Memory 1">
             </div>
             
             <div class="memory-card">
-                <div class="memory-icon">💫</div>
-                <h3 class="memory-title">More Laughs</h3>
-                <p class="memory-text">I love your smile</p>
+                <img src="2.jpeg" alt="Memory 2">
             </div>
             
             <div class="memory-card">
-                <div class="memory-icon">⭐</div>
-                <h3 class="memory-title">Look!</h3>
-                <p class="memory-text">This made me think of you</p>
+                <img src="3.jpeg" alt="Memory 3">
             </div>
         </div>
         
